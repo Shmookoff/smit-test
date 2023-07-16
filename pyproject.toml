@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "smit-test"
+version = "0.1.0"
+description = ""
+authors = ["shmookoff <shmookoff@gmail.com>"]
+readme = "README.md"
+packages = [{include = "smit_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.100.0"
+uvicorn = {extras = ["standard"], version = "^0.23.0"}
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+mypy = "^1.4.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
