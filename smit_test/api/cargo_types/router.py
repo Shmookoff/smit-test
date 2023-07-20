@@ -32,15 +32,6 @@ async def read(cargo_type_title: str) -> ReadCargoTypeResponse:
     return ReadCargoTypeResponse.model_validate(cargo_type)
 
 
-# @cargo_types_router.put("/{cargo_type_title}", dependencies=protected_route_deps)
-async def update(
-    cargo_type_title: str, data: CreateCargoTypeRequest
-) -> ReadCargoTypeResponse:
-    await CargoTypes.filter(title=cargo_type_title).update(**data.model_dump())
-    cargo_type = await CargoTypes.get(title=cargo_type_title)
-    return ReadCargoTypeResponse.model_validate(cargo_type)
-
-
 @cargo_types_router.delete("/{cargo_type_title}", dependencies=protected_route_deps)
 async def delete(cargo_type_title: str) -> Status:
     deleted_count = await CargoTypes.filter(title=cargo_type_title).delete()
