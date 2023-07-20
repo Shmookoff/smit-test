@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
 
+    APP_PORT: int
     ADMIN_TOKEN: str
 
 
