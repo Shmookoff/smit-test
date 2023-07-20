@@ -30,12 +30,7 @@ async def create(data: CreateTariffsRequest) -> Status:
                     rate=tariff_detail.rate,
                 )
             )
-    try:
-        await Tariffs.bulk_create(tariffs)
-    except IntegrityError:
-        raise HTTPException(
-            status.HTTP_400_BAD_REQUEST, "Some CargoType Does Not Exist"
-        )
+    await Tariffs.bulk_create(tariffs)
     return Status(message="Created")
 
 
@@ -60,12 +55,7 @@ async def read(tariff_id: int) -> ReadTariffResponse:
 
 @tariffs_router.put("/{tariff_id}", dependencies=protected_route_deps)
 async def update(tariff_id: int, data: CreateTariffRequest) -> ReadTariffResponse:
-    try:
-        await Tariffs.filter(id=tariff_id).update(**data.model_dump(by_alias=True))
-    except IntegrityError:
-        raise HTTPException(
-            status.HTTP_400_BAD_REQUEST, f"CargoType {data.cargo_type} Does Not Exist"
-        )
+    await Tariffs.filter(id=tariff_id).update(**data.model_dump(by_alias=True))
     tariff = await Tariffs.get(id=tariff_id)
     return ReadTariffResponse.model_validate(tariff)
 
