@@ -1,1 +1,3 @@
-from .router import tariffs_router
+__all__ = ("Tariffs",)
+
+from .models import Tariffs

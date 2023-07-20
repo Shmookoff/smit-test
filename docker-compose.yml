@@ -13,5 +13,19 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  smit_test:
+    build: .
+    environment:
+      POSTGRES_HOST: "postgres"
+      POSTGRES_PORT: "${POSTGRES_PORT}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      ADMIN_TOKEN: "${ADMIN_TOKEN}"
+    ports:
+      - "${APP_PORT}:8000"
+    depends_on:
+      - postgres
+
 volumes:
   postgres:
